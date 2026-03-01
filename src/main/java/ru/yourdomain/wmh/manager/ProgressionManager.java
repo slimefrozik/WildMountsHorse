@@ -20,8 +20,8 @@ public class ProgressionManager {
     }
 
     public void applyProgression(Horse horse, HorseProfile profile) {
-        applyModifier(horse.getAttribute(Attribute.MOVEMENT_SPEED), SPEED_MODIFIER_ID, "wmh_speed_bonus", speedBonus(profile));
-        applyModifier(horse.getAttribute(Attribute.JUMP_STRENGTH), JUMP_MODIFIER_ID, "wmh_jump_bonus", jumpBonus(profile));
+        applyModifier(horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED), SPEED_MODIFIER_ID, "wmh_speed_bonus", speedBonus(profile));
+        applyModifier(horse.getAttribute(Attribute.HORSE_JUMP_STRENGTH), JUMP_MODIFIER_ID, "wmh_jump_bonus", jumpBonus(profile));
     }
 
     private void applyModifier(AttributeInstance attribute, UUID id, String name, double bonus) {

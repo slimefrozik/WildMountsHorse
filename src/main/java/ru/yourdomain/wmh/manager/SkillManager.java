@@ -28,7 +28,7 @@ public class SkillManager {
         }
 
         if (profile.hasSkill(HorseSkill.AMPHIBIAN) && horse.isInWater()) {
-            var attr = horse.getAttribute(Attribute.MOVEMENT_SPEED);
+            var attr = horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
             if (attr != null) {
                 attr.getModifiers().stream().filter(m -> m.getUniqueId().equals(AMPHIBIAN_WATER_SPEED_ID)).forEach(attr::removeModifier);
                 attr.addModifier(new AttributeModifier(AMPHIBIAN_WATER_SPEED_ID, "wmh_amphibian_speed", 0.15,

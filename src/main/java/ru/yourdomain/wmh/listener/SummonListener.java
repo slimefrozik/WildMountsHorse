@@ -79,15 +79,11 @@ public class SummonListener implements Listener {
             return 30;
         }
 
-        String typeName = armor.getType().name();
-        if ("NETHERITE_HORSE_ARMOR".equals(typeName)) {
-            return 300;
-        }
-
         return switch (armor.getType()) {
             case IRON_HORSE_ARMOR -> 80;
             case GOLDEN_HORSE_ARMOR -> 120;
             case DIAMOND_HORSE_ARMOR -> 200;
+            case NETHERITE_HORSE_ARMOR -> 300;
             default -> 30;
         };
     }
