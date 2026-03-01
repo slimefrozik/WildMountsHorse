@@ -1,9 +1,9 @@
 package ru.yourdomain.wmh.listener;
 
-import com.destroystokyo.paper.event.entity.HorseJumpEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.HorseJumpEvent;
 import ru.yourdomain.wmh.manager.HorseManager;
 import ru.yourdomain.wmh.manager.ProgressionManager;
 

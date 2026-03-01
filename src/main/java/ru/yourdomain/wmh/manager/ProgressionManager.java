@@ -1,41 +1,43 @@
 package ru.yourdomain.wmh.manager;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Horse;
+import org.bukkit.inventory.EquipmentSlotGroup;
 import ru.yourdomain.wmh.WMHPlugin;
 import ru.yourdomain.wmh.model.HorseProfile;
 
-import java.util.UUID;
-
 public class ProgressionManager {
-    private static final UUID SPEED_MODIFIER_ID = UUID.fromString("6e4ce911-2f0d-4a7e-92f8-6c5e8de2cbf0");
-    private static final UUID JUMP_MODIFIER_ID = UUID.fromString("34a875d0-d28b-4a42-b604-e3b443db95f9");
-
     private final WMHPlugin plugin;
+    private final NamespacedKey speedModifierKey;
+    private final NamespacedKey jumpModifierKey;
 
     public ProgressionManager(WMHPlugin plugin) {
         this.plugin = plugin;
+        this.speedModifierKey = new NamespacedKey(plugin, "speed_bonus");
+        this.jumpModifierKey = new NamespacedKey(plugin, "jump_bonus");
     }
 
     public void applyProgression(Horse horse, HorseProfile profile) {
-        applyModifier(horse.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED), SPEED_MODIFIER_ID, "wmh_speed_bonus", speedBonus(profile));
-        applyModifier(horse.getAttribute(Attribute.HORSE_JUMP_STRENGTH), JUMP_MODIFIER_ID, "wmh_jump_bonus", jumpBonus(profile));
+        applyModifier(horse.getAttribute(Attribute.MOVEMENT_SPEED), speedModifierKey, speedBonus(profile));
+        applyModifier(horse.getAttribute(Attribute.JUMP_STRENGTH), jumpModifierKey, jumpBonus(profile));
     }
 
-    private void applyModifier(AttributeInstance attribute, UUID id, String name, double bonus) {
+    private void applyModifier(AttributeInstance attribute, NamespacedKey key, double bonus) {
         if (attribute == null) {
             return;
         }
+
         attribute.getModifiers().stream()
-            .filter(m -> m.getUniqueId().equals(id))
+            .filter(modifier -> modifier.getKey().equals(key))
             .forEach(attribute::removeModifier);
         if (bonus <= 0) {
             return;
         }
 
-        AttributeModifier modifier = new AttributeModifier(id, name, bonus, AttributeModifier.Operation.MULTIPLY_SCALAR_1);
+        AttributeModifier modifier = new AttributeModifier(key, bonus, AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
         attribute.addModifier(modifier);
     }
 
