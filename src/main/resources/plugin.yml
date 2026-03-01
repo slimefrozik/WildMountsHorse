@@ -1,0 +1,13 @@
+name: WildMountsHorse
+main: ru.yourdomain.wmh.WMHPlugin
+version: 1.0.0
+api-version: '1.21'
+authors: [yourdomain]
+commands:
+  wmh:
+    description: Shows your horse location.
+    usage: /wmh
+    permission: wmh.use
+permissions:
+  wmh.use:
+    default: true

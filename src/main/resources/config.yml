@@ -1,0 +1,12 @@
+speed:
+  max-bonus: 0.3
+
+jump:
+  max-bonus: 0.25
+
+summon:
+  invulnerable-seconds: 3
+
+skills:
+  amphibian:
+    water-steps-required: 3000
